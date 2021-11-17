@@ -1,0 +1,35 @@
+<!-- head -->
+<%- include('partials/head.ejs')  %>
+<body>
+    <%- include('partials/navbar.ejs')  %>
+    <main>
+        <div class="container">
+            <br>
+            <h1 class="text-primary">Pagina inicial</h1>
+            <hr>
+            <div class="form-group">
+                <form action="/salvarmensagem" method="post">
+                    <label></label>
+                    <input type="text" name="nome" class="form-control" placeholder="Nome">
+                    <br>
+                    <textarea name="mensagem"  rows="10" cols="100%" class="form-control"></textarea><br>
+                    <button class="btn btn-success">Enviar</button>
+                </form>
+            </div>
+            <hr>
+            <div class="card">
+                <div class="card-body">
+                    <% mensagens.forEach(mensagens =>{ %>
+                        <% data = new Date(mensagens.createdAt); %>
+                        <% dataFormatada = data.toLocaleDateString('pt-BR', {timeZone: 'UTC'}); %>
+                        <% hora = data.getHours(); %>
+                        <% minuto = data.getMinutes(); %>
+                        <p>(<%= hora %>:<%= minuto %>) <%= mensagens.nome %>: <%= mensagens.mensagem %></p>
+                    <% }) %>
+                </div>
+            </div>
+        </div>
+    </main>
+    <br>
+    <!-- footer -->
+    <%- include('partials/footer.ejs')  %>
